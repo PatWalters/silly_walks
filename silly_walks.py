@@ -1,6 +1,5 @@
 # 1/usr/bin/env python
 
-import sys
 from rdkit import Chem
 from rdkit.Chem import AllChem
 import pandas as pd
