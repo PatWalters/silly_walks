@@ -117,7 +117,7 @@ class RingSystemLookup:
         if mol:
             ring_system_finder = RingSystemFinder()
             ring_system_list = ring_system_finder.find_ring_systems(mol)
-            return [(x,self.ring_dict.get(x)) for x in ring_system_list]
+            return [(x,self.ring_dict.get(x) or 0) for x in ring_system_list]
         else:
             return []
 
@@ -130,7 +130,14 @@ class RingSystemLookup:
         mol = Chem.MolFromSmiles(smi)
         return self.process_mol(mol)
 
-
+def ring_systems_min_score(freq_list):
+    if len(freq_list):
+        res = min([x[1] for x in freq_list])
+    else:
+        res = -1
+    return res
+    
+    
 def test_ring_system_lookup(input_filename, output_filename):
     """
     test for ring system lookup
